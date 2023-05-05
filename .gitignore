@@ -1,0 +1,26 @@
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+*.pyc
+
+# dotenv environment variables file
+.env
+env/
+
+# cache
+__pycache__
+ms/__pycache__
+ms/customers/__pycache__
+ms/models/__pycache__
+ms/products/__pycache__
+ms/validations/__pycache__
+
+.DS_Store

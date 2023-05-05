@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: py-api-ms
+  namespace: microservices
+  labels:
+    service: py-api-ms
+spec:
+  selector:
+    app: py-api-ms
+  type: ClusterIP
+  # type: NodePort
+  # type: LoadBalancer
+  ports:
+  - port: 5000
+    targetPort: 5000
+    # nodePort: 30000

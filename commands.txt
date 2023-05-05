@@ -1,0 +1,52 @@
+# Docker Compose Commands
+docker-compose up -d
+
+docker container ps | grep py-api-ms
+docker logs py-api-ms
+docker container exec -it py-api-ms sh
+
+docker-compose exec py-api-ms python manage.py recreate_db
+docker-compose exec py-api-ms python manage.py seed_db
+
+
+docker-compose down --volumes
+
+
+# Docker Image Build
+docker build -t <dockerusername>/py-api-ms:1.0 .
+docker login
+docker push <dockerusername>/py-api-ms:1.0
+
+
+# Kubectl Commands
+
+kubectl apply -f ./kubernetes/1_namespace.yaml
+kubectl apply -f ./kubernetes/2_config-map.yaml
+kubectl apply -f ./kubernetes/3_secret.yaml
+kubectl apply -f ./kubernetes/4_persistent-volume.yaml
+kubectl apply -f ./kubernetes/5_persistent-volume-claim.yaml
+kubectl apply -f ./kubernetes/6_deployment-postgres.yaml
+kubectl apply -f ./kubernetes/7_service-postgres.yaml
+kubectl apply -f ./kubernetes/8_deployment-flask.yaml
+kubectl apply -f ./kubernetes/9_service-flask.yaml
+
+kubectl get -n microservices pods
+kubectl get -n microservices svc
+
+kubectl -n microservices logs py-api-ms-<pod_id>
+kubectl -n microservices exec -it py-api-ms-<pod_id> -- python manage.py recreate_db
+kubectl -n microservices exec -it py-api-ms-<pod_id> -- python manage.py seed_db
+
+
+kubectl -n microservices port-forward svc/py-api-ms 5000:5000
+
+
+kubectl delete -f ./kubernetes/9_service-flask.yaml
+kubectl delete -f ./kubernetes/8_deployment-flask.yaml
+kubectl delete -f ./kubernetes/7_service-postgres.yaml
+kubectl delete -f ./kubernetes/6_deployment-postgres.yaml
+kubectl delete -f ./kubernetes/5_persistent-volume-claim.yaml
+kubectl delete -f ./kubernetes/4_persistent-volume.yaml
+kubectl delete -f ./kubernetes/3_secret.yaml
+kubectl delete -f ./kubernetes/2_config-map.yaml
+kubectl delete -f ./kubernetes/1_namespace.yaml

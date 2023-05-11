@@ -1,6 +1,6 @@
 import os
 
-basedir = os.path.abspath(os.path.dirname(__file__))
+BASEDIR = os.path.abspath(os.path.dirname(__file__))
 
 POSTGRES_USER = os.environ.get('POSTGRES_USER')
 POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
@@ -23,8 +23,12 @@ class DevelopmentConfig(BaseConfig):
     SECRET_KEY = SECRET
     SQLALCHEMY_ECHO = True
     DEBUG = True
-    TESTING = True
 
+class TestingConfig(BaseConfig):
+    """Testing Configuration"""
+    SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(BASEDIR, 'test.db')}"
+    SECRET_KEY = SECRET
+    TESTING = True
 
 class ProductionConfig(BaseConfig):
     """Production Configuration"""

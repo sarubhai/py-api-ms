@@ -30,6 +30,7 @@ services:
     env_file: 
       - .env
     environment:
+      FLASK_ENV: $FLASK_ENV
       FLASK_DEBUG: $FLASK_DEBUG
       APP_SETTINGS: $APP_SETTINGS
       SECRET_KEY: $SECRET_KEY
@@ -41,8 +42,8 @@ services:
       POSTGRES_DB: $POSTGRES_DB
     ports:
       - "5000:5000"
-    #volumes:     
-    #  - ./:/usr/src/app
+    volumes:     
+      - .:/usr/src/app
     networks:
       - py-api-ms-network
 

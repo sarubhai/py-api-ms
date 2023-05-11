@@ -1,4 +1,5 @@
 # Docker Compose Commands
+# docker-compose up -d --build
 docker-compose up -d
 
 docker container ps | grep py-api-ms
@@ -7,7 +8,8 @@ docker container exec -it py-api-ms sh
 
 docker-compose exec py-api-ms python manage.py recreate_db
 docker-compose exec py-api-ms python manage.py seed_db
-
+docker-compose exec py-api-ms python -m pytest
+# docker-compose exec py-api-ms python -m pytest ms/tests/functional
 
 docker-compose down --volumes
 

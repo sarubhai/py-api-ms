@@ -8,7 +8,7 @@ class ProductValidation():
             'name': 'required|string',
             'uom': 'required|string',
             'quantity': 'required|integer|min:1',
-            'price': 'required|decimal',
+            'price': 'required',
             'in_stock': 'required'
         }
 

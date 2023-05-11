@@ -46,7 +46,7 @@ def create():
     return make_response(jsonify(response_object), 201)
 
 
-@products_blueprint.route('/<product_id>', methods=['GET', 'PUT', 'DELETE'])
+@products_blueprint.route('/<product_id>', methods=['GET', 'PUT', 'PATCH', 'DELETE'])
 def single_product(product_id):
     response_object = {
       'status': 'success',
@@ -63,7 +63,7 @@ def single_product(product_id):
         return make_response(jsonify(response_object), 200)
     
 
-    if request.method == 'PUT':
+    if request.method == 'PUT' or request.method == 'PATCH':
         request_data = request.get_json()
         val = json.loads(ProductValidation.create_update_request(request_data))
         if val['invalid']:
@@ -81,7 +81,7 @@ def single_product(product_id):
 
         response_object['message'] = 'Product Updated'
         response_object['product'] = Product.to_json(product)
-        return make_response(jsonify(response_object), 201)
+        return make_response(jsonify(response_object), 200)
 
 
     if request.method == 'DELETE':

@@ -44,6 +44,14 @@ def create_app(script_info=None):
             'container_id': os.uname()[1]
         })
 
+    @app.route('/api/v1/hotreload', methods=['GET'])
+    def reload():
+        return jsonify({
+            'status': 'success',
+            'message': 'Test Hot Reload by changing this message!',
+            'container_id': os.uname()[1]
+        })
+
 
     # Error Handling
     @app.errorhandler(400)

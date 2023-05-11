@@ -3,6 +3,10 @@ FROM python:3.9.16-slim-buster
 # Specify the Working Directory inside the Container
 WORKDIR /usr/src/app
 
+# set environment variables
+# REMOVE FOR PROD BUILD
+ENV PYTHONDONTWRITEBYTECODE 1
+
 # Install netcat
 RUN apt-get update && apt-get -y install netcat && apt-get clean
 
